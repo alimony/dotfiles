@@ -536,14 +536,14 @@ sudo mdutil -E / > /dev/null
 # Only use UTF-8 in Terminal.app
 defaults write com.apple.terminal StringEncodings -array 4
 
-# Install the HomebrewModified theme
-/usr/libexec/PlistBuddy -c "Delete :Window\ Settings:HomebrewModified" ~/Library/Preferences/com.apple.Terminal.plist 2> /dev/null
-/usr/libexec/PlistBuddy -c "Add :Window\ Settings:HomebrewModified dict" ~/Library/Preferences/com.apple.Terminal.plist
-/usr/libexec/PlistBuddy -c "Merge init/HomebrewModified.terminal :Window\ Settings:HomebrewModified" ~/Library/Preferences/com.apple.Terminal.plist
+# Install the Homebrew Modified theme
+/usr/libexec/PlistBuddy -c "Delete :Window\ Settings:Homebrew\ Modified" ~/Library/Preferences/com.apple.Terminal.plist 2> /dev/null
+/usr/libexec/PlistBuddy -c "Add :Window\ Settings:Homebrew\ Modified dict" ~/Library/Preferences/com.apple.Terminal.plist
+/usr/libexec/PlistBuddy -c "Merge ${HOME}/init/Homebrew\ Modified.terminal :Window\ Settings:Homebrew\ Modified" ~/Library/Preferences/com.apple.Terminal.plist
 
-# Use the HomebrewModified theme by default in Terminal.app
-defaults write com.apple.Terminal "Default Window Settings" -string "HomebrewModified"
-defaults write com.apple.Terminal "Startup Window Settings" -string "HomebrewModified"
+# Use the Homebrew Modified theme by default in Terminal.app
+defaults write com.apple.Terminal "Default Window Settings" -string "Homebrew Modified"
+defaults write com.apple.Terminal "Startup Window Settings" -string "Homebrew Modified"
 
 # Always show tabbar
 defaults write com.apple.Terminal ShowTabBar -bool true
