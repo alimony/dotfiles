@@ -345,7 +345,7 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 defaults write com.apple.dock mouse-over-hilite-stack -bool true
 
 # Set the icon size of Dock items to 36 pixels
-defaults write com.apple.dock tilesize -int 36
+defaults write com.apple.dock tilesize -int 48
 
 # Minimize windows into their application’s icon
 #defaults write com.apple.dock minimize-to-application -bool true
@@ -535,7 +535,7 @@ defaults write com.apple.terminal StringEncodings -array 4
 
 # Use a modified version of the Pro theme by default in Terminal.app
 open "${HOME}/init/HomebrewModified.terminal"
-sleep 1 # Wait a bit to make sure the theme is loaded
+sleep 5 # Wait a bit to make sure the theme is loaded
 defaults write com.apple.terminal "Default Window Settings" -string "HomebrewModified"
 defaults write com.apple.terminal "Startup Window Settings" -string "HomebrewModified"
 
