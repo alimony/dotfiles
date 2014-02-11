@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
+'''
+This script will print out all lines in the supplied file, with both a prefix
+and a suffix, any which can be an empty string. The first argument should be the
+prefix, the second argument the file path, and the third argument the suffix.
+
+Examples:
+
+wrap_line "start" /path/to/some/file.txt "end"
+wrap_line "" /path/to/some/file.txt ";"
+wrap_line "line: " /path/to/some/file.txt ""
+'''
+
+import sys
+
+if len(sys.argv) != 4:
+    print 'You must provide one input file and one suffix.'
+    sys.exit(1)
+
+with open(sys.argv[2], 'rU') as f:
+    for line in f:
+        print '%s%s%s' % (sys.argv[1], line.rstrip('\r\n'), sys.argv[3])

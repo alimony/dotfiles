@@ -1,0 +1,36 @@
+#!/usr/bin/env sh
+
+# This script checks if the input is available as a domain name in one of the
+# top-level domains .com, .org, .net or .se. If the domain name is not
+# available, its expiration date will be printed, if the flag --expiry was
+# supplied as the second argument.
+
+# These are the relevant rows that will show up if the domain is available:
+#     .com    No match for "DOMAIN.COM".
+#     .org    NOT FOUND
+#     .net    No match for "DOMAIN.NET".
+#     .se     "domain.se" not found.
+
+# These are the relevant rows that will show up if the domain isn't available:
+#     .com    registration-expiration:         01-Jan-2013
+#     .org    Expiration Date:01-Jan-2013 12:00:00 UTC
+#     .net    Expiration Date: 01-jan-2013
+#     .se     expires:          2013-01-01
+
+for tld in '.com' '.org' '.net' '.se'; do
+	domain=$1$tld
+	result=`whois $domain`
+	case $result in
+		# The domain was not found, i.e. is available.
+		*"No match"*|*"NOT FOUND"*|*"not found"*)
+		echo "$domain is available."
+		;;
+		# The domain was already taken.
+		*)
+		if [[ $* == *--expiry* ]]; then
+			expire="`echo \"$result\" | grep -i -m 1 expir`"
+			echo $domain $expire
+		fi
+		;;
+	esac
+done

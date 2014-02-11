@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+# This script will fix/remove any duplicate items in the “Open With” menu in the
+# “Get Info” window of items in Finder.
+
+echo "Rebuilding LaunchServices register..." &&
+/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister -kill -r -domain local -domain user &&
+echo "Restarting Finder..." &&
+killall Finder &&
+echo "Done!" &&
+exit 0

@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+# This script converts a regular packet capture file from e.g. Wireshark, to
+# the format hashcat needs to do its work.
+#
+# $1 = infile
+# $2 = outfile
+
+WPACLEANED=$1-wpacleaned
+wpaclean "$WPACLEANED" "$1" && aircrack-ng "$WPACLEANED" -J "$2" && rm "$WPACLEANED"

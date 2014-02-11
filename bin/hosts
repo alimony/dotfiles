@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+
+# This script is a convenient way of adding or removing entries in /etc/hosts.
+
+DEFAULT_IP=127.0.0.1
+IP=${3:-$DEFAULT_IP}
+
+case "$1" in
+	add)
+		echo "$IP $2"  >> /etc/hosts
+		;;
+	remove)
+		sed -ie "\|^$IP $2\$|d" /etc/hosts
+		;;
+	*)
+		echo "Usage: "
+		echo "hosts [add|remove] [hostname] [ip]"
+		echo
+		echo "Ip defaults to 127.0.0.1"
+		echo "Examples:"
+		echo "hosts add testing.com"
+		echo "hosts remove testing.com 192.168.1.1"
+		exit 1
+		;;
+esac
+
+exit 0

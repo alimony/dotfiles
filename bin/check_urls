@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+# With an input file of one URL per line, this script will output the HTTP
+# status code of each URL, and additionally the new URL if a redirect happened.
+
+if ! wget -V > /dev/null 2>&1; then
+	echo "Could not find wget.";
+	exit 1;
+fi
+
+while read LINE; do
+	echo "HTTP status code for $LINE: \c";
+	wget --spider -S "$LINE" 2>&1 | grep "HTTP/\|  Location\:" | awk '{print $2}';
+done < "$1"

@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+# This script counts the number of files by type, in the current
+# directory recursively. Hidden files are not counted.
+
+echo "Counting files by type..."
+find . -type f -iname "*.*" -not -regex ".*/\..*" | awk -F. '{ print $NF }' | tr "[:upper:]" "[:lower:]" | sort | uniq -ic | sort --numeric-sort --reverse --key=1,1

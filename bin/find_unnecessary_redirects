@@ -1,0 +1,35 @@
+#!/usr/bin/env sh
+
+# This script will spider the given URL for any 301 redirects that only add a
+# trailing slash, causing an extra, unnecessary request. It takes one parameter,
+# the initial URL, which will be searched recursively up to five levels deep.
+#
+#     Usage: find_unnecessary_redirects URL
+#
+# TODO: It should somehow be displayed which line on which page contained the
+# redirect URL, but wget does not provide any easy way to do that... We can
+# probably figure something out sooner or later.
+
+if [ $# -eq 0 ] ; then
+	echo "You must specify a URL."
+	echo "Usage: find_unnecessary_redirects URL"
+	exit
+fi
+
+DOMAIN=`echo "$1" | awk -F[./] '{ print $(NF-1)"."$NF }'`
+echo "Looking for unnecessary redirects, this can take a while..." &&
+wget\
+	--spider\
+	--recursive\
+	--level=5\
+	--follow-tags=""\
+	--domains="$DOMAIN"\
+	--no-directories "$1" 2>&1 |
+pcregrep\
+	--multiline\
+	--regexp='--.*--[[:space:]]+(.*)\n(?:.*\n)*.*(?:301 Moved Permanently)\n(?:Location:[[:space:]]+)(.*)[[:space:]]+(?:\[following\])'\
+	--only-matching=1\
+	--om-separator=" "\
+	--only-matching=2 |
+awk\
+	'$2 == ($1 "/") { printf "%s\tREDIRECTS TO\t%s\n", $1, $2 }'

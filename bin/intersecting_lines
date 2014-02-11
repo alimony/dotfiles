@@ -1,0 +1,19 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
+'''
+This script will print out all lines that occur in both input files.
+'''
+
+import sys
+
+if len(sys.argv) != 3:
+    print 'You must provide two input files.'
+    sys.exit(1)
+
+with open(sys.argv[1]) as f1, open(sys.argv[2]) as f2:
+    first_set = f1.readlines()
+    second_set = f2.readlines()
+    for item in first_set:
+        if item in second_set:
+            print item,
