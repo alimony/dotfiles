@@ -1,0 +1,2 @@
+export PATH="$(brew --prefix)/bin:/usr/local/sbin:$(brew --prefix coreutils)/libexec/gnubin:${PATH}"
+export MANPATH="$(brew --prefix coreutils)/libexec/gnuman:${MANPATH}"
