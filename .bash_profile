@@ -40,3 +40,6 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 
 # Add tab completion for anything installed through brew
 [ -f $(brew --prefix)/etc/bash_completion ] && source $(brew --prefix)/etc/bash_completion
+
+# Initialize virtualenvwrapper
+source /usr/local/bin/virtualenvwrapper.sh

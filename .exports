@@ -5,6 +5,7 @@ export EDITOR="subl -w"
 export HISTSIZE=32768
 export HISTFILESIZE=$HISTSIZE
 export HISTCONTROL=ignoredups
+
 # Make some commands not show up in history
 export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
 
@@ -23,3 +24,13 @@ export GREP_OPTIONS="--color=auto"
 
 # Link Homebrew casks in `/Applications` rather than `~/Applications`
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+# Python related things
+export PIP_REQUIRE_VIRTUALENV=true
+export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
+export PYTHONDONTWRITEBYTECODE=1
+
+# RVM
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+export RBENV_VERSION=1.9.3-p448
+export PATH="${PATH}:$HOME/.rvm/bin"
