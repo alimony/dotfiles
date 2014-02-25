@@ -312,3 +312,8 @@ function np() {
 function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX
 }
+
+# Profile python script, writing output to file.
+function python_profile() {
+	python -m cProfile -o "$1.profile" "$@"
+}
