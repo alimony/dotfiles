@@ -28,7 +28,6 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 # Python related things
 export PIP_REQUIRE_VIRTUALENV=true
 export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
-export PYTHONDONTWRITEBYTECODE=1
 
 # RVM
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
