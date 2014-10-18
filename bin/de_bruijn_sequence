@@ -8,6 +8,7 @@ The de_bruijn() function is in its entirety taken from:
 http://en.wikipedia.org/wiki/De_Bruijn_sequence#Algorithm
 '''
 
+from __future__ import print_function
 import sys
 
 
@@ -32,12 +33,12 @@ def de_bruijn(k, n):
     return sequence
 
 if len(sys.argv) != 3:
-    print 'You must provide two input parameters:'
-    print '• k (alphabet size)'
-    print '• n (subsequence length)'
+    print('You must provide two input parameters:')
+    print('• k (alphabet size)')
+    print('• n (subsequence length)')
     sys.exit(1)
 
 k = int(sys.argv[1])
 n = int(sys.argv[2])
 
-print ''.join([str(x) for x in de_bruijn(k, n)])
+print(''.join([str(x) for x in de_bruijn(k, n)]))

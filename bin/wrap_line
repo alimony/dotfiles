@@ -13,12 +13,13 @@ wrap_line "" /path/to/some/file.txt ";"
 wrap_line "line: " /path/to/some/file.txt ""
 '''
 
+from __future__ import print_function
 import sys
 
 if len(sys.argv) != 4:
-    print 'You must provide one input file and one suffix.'
+    print('You must provide one input file and one suffix.')
     sys.exit(1)
 
 with open(sys.argv[2], 'rU') as f:
     for line in f:
-        print '%s%s%s' % (sys.argv[1], line.rstrip('\r\n'), sys.argv[3])
+        print('%s%s%s' % (sys.argv[1], line.rstrip('\r\n'), sys.argv[3]))

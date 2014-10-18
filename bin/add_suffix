@@ -6,12 +6,13 @@ This script will print out all lines in the supplied file, with the second
 argument appended to the start of each line.
 '''
 
+from __future__ import print_function
 import sys
 
 if len(sys.argv) != 3:
-    print 'You must provide one input file and one suffix.'
+    print('You must provide one input file and one suffix.')
     sys.exit(1)
 
 with open(sys.argv[1], 'rU') as f:
     for line in f:
-        print '%s%s' % (line.rstrip('\r\n'), sys.argv[2])
+        print('%s%s' % (line.rstrip('\r\n'), sys.argv[2]))

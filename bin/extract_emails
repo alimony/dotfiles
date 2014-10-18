@@ -6,6 +6,7 @@ Description: extract email addresses from stdin to stdout
 Usage example: cat whatever.txt | extract-email | sort -fu > addr.txt
 '''
 
+from __future__ import print_function
 import re
 import sys
 
@@ -14,4 +15,4 @@ email_pattern = re.compile('([\w\-\.]+@(\w[\w\-]+\.)+[\w\-]+)')
 for line in sys.stdin:
     # There may be several matches per line.
     for match in email_pattern.findall(line):
-        print match[0]
+        print(match[0])
