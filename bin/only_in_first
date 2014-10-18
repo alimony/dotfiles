@@ -5,15 +5,21 @@
 This script will print out all lines that occur only in the first input file.
 '''
 
+from __future__ import print_function
 import sys
 
 if len(sys.argv) != 3:
-    print 'You must provide two input files.'
+    print('You must provide two input files.')
     sys.exit(1)
 
 with open(sys.argv[1]) as f1, open(sys.argv[2]) as f2:
     first_set = f1.readlines()
     second_set = f2.readlines()
+
+    # Strip line endings to avoid false positives due to difference here.
+    first_set = [l.rstrip() for l in first_set]
+    second_set = [l.rstrip() for l in second_set]
+
     for item in first_set:
-        if not item in second_set:
-            print item,
+        if item not in second_set:
+            print(item)
