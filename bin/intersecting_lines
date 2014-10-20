@@ -13,13 +13,10 @@ if len(sys.argv) != 3:
     sys.exit(1)
 
 with open(sys.argv[1]) as f1, open(sys.argv[2]) as f2:
-    first_set = f1.readlines()
-    second_set = f2.readlines()
+    first_set = {l.rstrip() for l in f1.readlines()}
+    second_set = {l.rstrip() for l in f2.readlines()}
 
-    # Strip line endings to avoid false positives due to difference here.
-    first_set = [l.rstrip() for l in first_set]
-    second_set = [l.rstrip() for l in second_set]
-
-    for item in first_set:
-        if item in second_set:
-            print(item)
+    # The printed order will be undefined, so it is up to the user to sort it
+    # afterwards, or any other processing.
+    for l in first_set & second_set:
+        print(l)
