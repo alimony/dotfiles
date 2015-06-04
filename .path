@@ -1,4 +1,4 @@
-export PATH="/Developer/NVIDIA/CUDA-6.5/bin:$(brew --prefix)/bin:/usr/local/heroku/bin:/usr/local/sbin:$(brew --prefix coreutils)/libexec/gnubin:/usr/local/share/npm/bin:${PATH}"
+export PATH="/Developer/NVIDIA/CUDA-6.5/bin:$(brew --prefix)/bin:/usr/local/heroku/bin:/usr/local/sbin:$(brew --prefix coreutils)/libexec/gnubin:/usr/local/share/npm/bin:/usr/local/opt/go/libexec/bin:${PATH}"
 export MANPATH="$(brew --prefix coreutils)/libexec/gnuman:${MANPATH}"
 export DYLD_LIBRARY_PATH="/Developer/NVIDIA/CUDA-6.5/lib:${DYLD_LIBRARY_PATH}"
 export LD_LIBRARY_PATH="/Developer/NVIDIA/CUDA-6.5/lib:${LD_LIBRARY_PATH}"
