@@ -42,9 +42,6 @@ brew install homebrew/dupes/openssh
 brew install homebrew/dupes/screen
 brew install homebrew/php/php55 --with-gmp
 
-# Install Python 3 and set it as the default `python` binary.
-brew install python3
-
 # Install some CTF tools; see https://github.com/ctfs/write-ups.
 brew install aircrack-ng
 brew install john
@@ -55,6 +52,7 @@ brew install git
 brew install git-lfs
 brew install imagemagick --with-webp
 brew install p7zip
+brew install python3
 
 # Remove outdated versions from the cellar.
 brew cleanup
