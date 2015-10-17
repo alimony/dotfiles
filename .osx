@@ -539,7 +539,7 @@ defaults write com.apple.terminal StringEncodings -array 4
 # Install the Homebrew Modified theme
 /usr/libexec/PlistBuddy -c "Delete :Window\ Settings:Homebrew\ Modified" ~/Library/Preferences/com.apple.Terminal.plist 2> /dev/null
 /usr/libexec/PlistBuddy -c "Add :Window\ Settings:Homebrew\ Modified dict" ~/Library/Preferences/com.apple.Terminal.plist
-/usr/libexec/PlistBuddy -c "Merge ${HOME}/init/Homebrew\ Modified.terminal :Window\ Settings:Homebrew\ Modified" ~/Library/Preferences/com.apple.Terminal.plist
+/usr/libexec/PlistBuddy -c "Merge ${HOME}/Documents/dotfiles/init/Homebrew\ Modified.terminal :Window\ Settings:Homebrew\ Modified" ~/Library/Preferences/com.apple.Terminal.plist
 
 # Use the Homebrew Modified theme by default in Terminal.app
 defaults write com.apple.Terminal "Default Window Settings" -string "Homebrew Modified"
