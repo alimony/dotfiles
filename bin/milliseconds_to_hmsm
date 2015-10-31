@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+# encoding: utf-8
+
+'''
+This script will convert an input file of milliseconds, one value per row, to a
+list of HH:MM:SS,MMM values.
+'''
+
+from __future__ import print_function
+import sys
+
+
+def milliseconds_to_hms(milliseconds):
+    seconds, milliseconds = divmod(milliseconds, 1000)
+    minutes, seconds = divmod(seconds, 60)
+    hours, minutes = divmod(minutes, 60)
+
+    return '{:02d}:{:02d}:{:02d},{}'.format(hours, minutes, seconds,
+                                            str(milliseconds).ljust(3, '0'))
+
+if len(sys.argv) != 2:
+    print('You must provide an input file.')
+    sys.exit(1)
+
+with open(sys.argv[1], 'rU') as f:
+    for line in f:
+        print(milliseconds_to_hms(int(line)))
