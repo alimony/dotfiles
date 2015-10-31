@@ -42,5 +42,5 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 [ -f $(brew --prefix)/etc/bash_completion ] && source $(brew --prefix)/etc/bash_completion
 
 # Initialize virtualenvwrapper
-export VIRTUALENVWRAPPER_VIRTUALENV_ARGS="--python=`which python3`"
+export VIRTUALENVWRAPPER_PYTHON="`which python3`"
 source /usr/local/bin/virtualenvwrapper.sh
