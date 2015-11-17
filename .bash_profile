@@ -1,11 +1,8 @@
-# Add `~/bin` to the `$PATH`
-export PATH="$HOME/bin:$PATH";
-
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
 for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
-	[ -r "$file" ] && [ -f "$file" ] && source "$file"
+	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
 
@@ -19,7 +16,7 @@ shopt -s histappend;
 shopt -s cdspell;
 
 # Don't attempt tab completion when prompt is empty.
-shopt -s no_empty_cmd_completion
+shopt -s no_empty_cmd_completion;
 
 # Enable some Bash 4 features when possible:
 # * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
@@ -39,8 +36,8 @@ complete -W "NSGlobalDomain" defaults;
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
 
 # Add tab completion for anything installed through brew
-[ -f $(brew --prefix)/etc/bash_completion ] && source $(brew --prefix)/etc/bash_completion
+[ -f $(brew --prefix)/etc/bash_completion ] && source $(brew --prefix)/etc/bash_completion;
 
 # Initialize virtualenvwrapper
-export VIRTUALENVWRAPPER_PYTHON="`which python3`"
-source /usr/local/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_PYTHON="`which python3`";
+source /usr/local/bin/virtualenvwrapper.sh;
