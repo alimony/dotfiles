@@ -53,7 +53,7 @@ prompt_git() {
 
 		[ -n "${s}" ] && s=" [${s}]";
 
-		echo -e "${1}${branchName}${blue}${s}";
+		echo -e "${1}${branchName}${2}${s}";
 	else
 		return;
 	fi;
@@ -96,7 +96,7 @@ PS1+="\[${white}\] at ";
 PS1+="\[${bold}${yellow}\]\h"; # host
 PS1+="\[${white}\] in ";
 PS1+="\[${bold}${cyan}\]\w"; # working directory
-PS1+="\$(prompt_git \"\[${white}\[ on \[${violet}\[\")"; # Git repository details
+PS1+="\$(prompt_git \"\[${white}\] on \[${violet}\]\")"; # Git repository details
 PS1+=" ";
 PS1+="\[${white}\]\$ \[${reset}\]"; # `$` (and reset color)
 export PS1;
