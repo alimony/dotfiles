@@ -59,6 +59,9 @@ unset jscbin;
 # Recursively delete `.DS_Store` files
 alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 
+# Recursively delete Python cache files
+alias pycleanup="find . -type f -name '*.py[co]' -delete; find . -type d -name '__pycache__' -delete"
+
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
