@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+# encoding: utf-8
+
+'''
+This script will scrape and print the content of the passed CSS selector from
+each URL in the passed input file (one URL per line).
+'''
+
+import sys
+
+import requests
+from bs4 import BeautifulSoup
+
+if len(sys.argv) != 3:
+    print('You must provide a CSS selector string and an input file.')
+    sys.exit(1)
+
+with open(sys.argv[2]) as f:
+    for line in f:
+        url = line.strip()
+        response = requests.get(url)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        selector = sys.argv[1].strip()
+        print(soup.select(selector))
