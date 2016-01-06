@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: utf-8
 
 '''
@@ -6,7 +6,6 @@ This script will print out all lines in the supplied file, with the second
 argument appended to the end of each line.
 '''
 
-from __future__ import print_function
 import sys
 
 if len(sys.argv) != 3:

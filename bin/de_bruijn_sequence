@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # encoding: utf-8
 
 '''
@@ -8,7 +8,6 @@ The de_bruijn() function is in its entirety taken from:
 http://en.wikipedia.org/wiki/De_Bruijn_sequence#Algorithm
 '''
 
-from __future__ import print_function
 import sys
 
 

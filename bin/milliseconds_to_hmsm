@@ -6,7 +6,6 @@ This script will convert an input file of milliseconds, one value per row, to a
 list of HH:MM:SS,MMM values.
 '''
 
-from __future__ import print_function
 import sys
 
 
