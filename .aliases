@@ -156,3 +156,5 @@ alias mysql_start='launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.pli
 
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
+
+alias joinpdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
