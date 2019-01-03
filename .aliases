@@ -158,3 +158,5 @@ alias mysql_start='launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.pli
 alias path='echo -e ${PATH//:/\\n}'
 
 alias joinpdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
+
+alias plex_unmatched=$'sqlite3 ~/Library/Application\ Support/Plex\ Media\ Server/Plug-in\ Support/Databases/com.plexapp.plugins.library.db \'select distinct(title) from metadata_items where title is not "" and guid like "local://%"\''
