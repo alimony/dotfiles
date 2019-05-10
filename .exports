@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Make vim the default editor.
+# Make Sublime Text the default editor.
 export EDITOR='subl -w';
 
 # Enable persistent REPL history for `node`.

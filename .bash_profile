@@ -50,3 +50,6 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 # Initialize virtualenvwrapper
 export VIRTUALENVWRAPPER_PYTHON="`which python3`";
 source /usr/local/bin/virtualenvwrapper.sh;
+
+# Suppress Wine debug messages.
+export WINEDEBUG="-all"
