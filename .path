@@ -1,4 +1,4 @@
-export PATH="$HOME/bin:$(brew --prefix)/opt/python/libexec/bin:$(brew --prefix)/bin:$HOME/.cargo/bin:/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/2.6.0/bin:/usr/local/heroku/bin:/usr/local/sbin:$(brew --prefix coreutils)/libexec/gnubin:/usr/local/share/npm/bin:/usr/local/opt/go/libexec/bin:/Applications/Wine Stable.app/Contents/Resources/wine/bin:/Applications/Wine Stable.app/Contents/Resources/start/bin:${PATH}"
+export PATH="$HOME/bin:$(brew --prefix)/opt/python/libexec/bin:$(brew --prefix)/bin:$HOME/.cargo/bin:/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/2.6.0/bin:/usr/local/heroku/bin:/usr/local/sbin:$(brew --prefix coreutils)/libexec/gnubin:/usr/local/share/npm/bin:/usr/local/opt/go/libexec/bin:/Applications/Wine Stable.app/Contents/Resources/wine/bin:/Applications/Wine Stable.app/Contents/Resources/start/bin:${PATH}:$HOME/Documents/google-cloud-sdk/bin"
 export MANPATH="$(brew --prefix coreutils)/libexec/gnuman:${MANPATH}"
 export DYLD_LIBRARY_PATH="${DYLD_LIBRARY_PATH}"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}"
