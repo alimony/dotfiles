@@ -33,13 +33,13 @@ elif [ -f /etc/bash_completion ]; then
 fi;
 
 # Add old bash completions for compatibility
-export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
+export BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d"
 
 # Tab completion for newer bash versions.
-[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+[[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
 
 # Enable tab completion for `g` by marking it as an alias for `git`
-if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+if type _git &> /dev/null && [ -f $(brew --prefix)/etc/bash_completion.d/git-completion.bash ]; then
 	complete -o default -o nospace -F _git g;
 fi;
 
@@ -55,7 +55,7 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 
 # Initialize virtualenvwrapper
 export VIRTUALENVWRAPPER_PYTHON="`which python3`";
-source /usr/local/bin/virtualenvwrapper.sh;
+source $(brew --prefix)/bin/virtualenvwrapper.sh;
 
 # Config and run NVM.
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
