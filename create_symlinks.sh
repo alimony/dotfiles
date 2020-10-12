@@ -11,7 +11,7 @@ rm -f .gitignore && ln -s Documents/dotfiles/.gitignore .gitignore;
 rm -f .hgignore && ln -s Documents/dotfiles/.hgignore .hgignore;
 rm -f .hushlogin && ln -s Documents/dotfiles/.hushlogin .hushlogin;
 rm -f .inputrc && ln -s Documents/dotfiles/.inputrc .inputrc;
-rm -f .macos && ln -s Documents/dotfiles/.macos .macos;
+#rm -f .macos && ln -s Documents/dotfiles/.macos .macos;
 rm -f .path && ln -s Documents/dotfiles/.path .path;
 rm -f .screenrc && ln -s Documents/dotfiles/.screenrc .screenrc;
 rm -f .vimrc && ln -s Documents/dotfiles/.vimrc .vimrc;
