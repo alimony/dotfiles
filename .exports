@@ -40,3 +40,6 @@ export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache;
 
 # Skip Wine debug warnings.
 export WINEDEBUG=-all
+
+# Ignore zsh warning on Catalina.
+export BASH_SILENCE_DEPRECATION_WARNING=1
