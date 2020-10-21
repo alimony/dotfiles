@@ -57,10 +57,8 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 export VIRTUALENVWRAPPER_PYTHON="`which python3`";
 source $(brew --prefix)/bin/virtualenvwrapper.sh;
 
-# Config and run NVM.
 export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/markus/Documents/google-cloud-sdk/path.bash.inc' ]; then . '/Users/markus/Documents/google-cloud-sdk/path.bash.inc'; fi
