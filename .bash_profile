@@ -58,7 +58,7 @@ export VIRTUALENVWRAPPER_PYTHON="`which python3`";
 source $(brew --prefix)/bin/virtualenvwrapper.sh;
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/nvm.sh --no-use" ] && \. "$NVM_DIR/nvm.sh"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/markus/Documents/google-cloud-sdk/path.bash.inc' ]; then . '/Users/markus/Documents/google-cloud-sdk/path.bash.inc'; fi
