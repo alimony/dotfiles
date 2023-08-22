@@ -61,6 +61,7 @@ source $(brew --prefix)/bin/virtualenvwrapper.sh;
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh --no-use" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/markus/Documents/google-cloud-sdk/path.bash.inc' ]; then . '/Users/markus/Documents/google-cloud-sdk/path.bash.inc'; fi
