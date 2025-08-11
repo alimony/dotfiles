@@ -146,3 +146,5 @@ alias plex_unmatched=$'sqlite3 ~/Library/Application\ Support/Plex\ Media\ Serve
 alias nvmuse='source ~/.nvm/nvm.sh && nvm use 20'
 
 alias pgstart='/opt/homebrew/opt/postgresql@14/bin/postgres -D /opt/homebrew/var/postgresql@14'
+
+alias fixemoji='killall TextInputMenuAgent && killall \"CharacterPicker\" && open -a \"System Preferences\" && osascript -e '\''tell application \"System Preferences\" to quit'\'''
