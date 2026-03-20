@@ -91,3 +91,5 @@ if [ -f '~/Documents/google-cloud-sdk/path.bash.inc' ]; then . '~/Documents/goog
 
 # The next line enables shell command completion for gcloud.
 if [ -f '~/Documents/google-cloud-sdk/completion.bash.inc' ]; then . '~/Documents/google-cloud-sdk/completion.bash.inc'; fi
+
+export ANTHROPIC_MODEL=opus
