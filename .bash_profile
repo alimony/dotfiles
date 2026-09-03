@@ -63,7 +63,6 @@ if [ -e "$HOME/.ssh/config" ]; then
 	elif [ -n "$ZSH_VERSION" ]; then
 		autoload -Uz compinit
 		compinit
-		compdef "_values 'SSH hosts' $_hosts" scp sftp ssh
 	fi
 fi
 
