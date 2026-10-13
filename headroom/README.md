@@ -42,7 +42,7 @@ launchd discards the proxy's console output. To see it, stop the agent and run t
 
 ```bash
 launchctl bootout gui/$(id -u)/local.headroom.proxy
-HEADROOM_BEACON=off ~/.local/bin/headroom proxy --host 127.0.0.1 --port 8787 --mode cache
+HEADROOM_BEACON=off HEADROOM_DISABLE_KOMPRESS=1 ~/.local/bin/headroom proxy --host 127.0.0.1 --port 8787 --mode cache
 ```
 
 Press Ctrl+C when you are done, then run the installer to start the agent again.

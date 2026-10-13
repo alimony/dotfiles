@@ -31,6 +31,9 @@
 		<!-- Keep user prompts verbatim. Tool results still compress. -->
 		<key>HEADROOM_COMPRESS_USER_MESSAGES</key>
 		<string>0</string>
+		<!-- Turn off Kompress, the machine-learning prose compressor. On an M2 it added 20 seconds to a large request and saved less than the structural compressors. -->
+		<key>HEADROOM_DISABLE_KOMPRESS</key>
+		<string>1</string>
 	</dict>
 	<!-- Start at login, and start again whenever the proxy exits. -->
 	<key>RunAtLoad</key>
