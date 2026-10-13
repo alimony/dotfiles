@@ -47,3 +47,13 @@ export GPG_TTY=$(tty);
 
 # Hide the “default interactive shell is now zsh” warning on macOS.
 export BASH_SILENCE_DEPRECATION_WARNING=1;
+
+# Turn off the anonymous usage upload in every `headroom` command.
+export HEADROOM_BEACON='off';
+
+# Route Claude Code through the local Headroom proxy while its launchd agent is installed. See `headroom/README.md`.
+# Behind a proxy, Claude Code sends every tool schema with each request unless tool search is turned on.
+if [ -f "$HOME/Library/LaunchAgents/local.headroom.proxy.plist" ]; then
+	export ANTHROPIC_BASE_URL='http://127.0.0.1:8787';
+	export ENABLE_TOOL_SEARCH='true';
+fi;
