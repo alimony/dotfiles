@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- Headroom proxy on 127.0.0.1:8787. install.sh replaces @HOME@ and loads the result into launchd. -->
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>local.headroom.proxy</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>@HOME@/.local/bin/headroom</string>
+		<string>proxy</string>
+		<string>--host</string>
+		<string>127.0.0.1</string>
+		<string>--port</string>
+		<string>8787</string>
+		<!-- Compress only the newest turn, so the provider's prompt cache keeps hitting. -->
+		<string>--mode</string>
+		<string>cache</string>
+	</array>
+	<key>EnvironmentVariables</key>
+	<dict>
+		<!-- Stop the anonymous usage upload, which is on by default. -->
+		<key>HEADROOM_BEACON</key>
+		<string>off</string>
+		<!-- Upgrades go through install.sh, not the daily PyPI check. -->
+		<key>HEADROOM_UPDATE_CHECK</key>
+		<string>off</string>
+		<!-- Keep compressed originals retrievable for 4 hours instead of 30 minutes. -->
+		<key>HEADROOM_CCR_TTL_SECONDS</key>
+		<string>14400</string>
+		<!-- Keep user prompts verbatim. Tool results still compress. -->
+		<key>HEADROOM_COMPRESS_USER_MESSAGES</key>
+		<string>0</string>
+	</dict>
+	<!-- Start at login, and start again whenever the proxy exits. -->
+	<key>RunAtLoad</key>
+	<true/>
+	<key>KeepAlive</key>
+	<true/>
+	<!-- Every Claude Code request waits on the proxy, so launchd must not throttle it like a background job. -->
+	<key>ProcessType</key>
+	<string>Interactive</string>
+	<!-- launchd discards console output. The proxy keeps its own log in ~/.headroom/logs/proxy-8787.log. -->
+</dict>
+</plist>
