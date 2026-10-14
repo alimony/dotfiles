@@ -90,3 +90,50 @@ if [ -f '~/Documents/google-cloud-sdk/path.bash.inc' ]; then . '~/Documents/goog
 
 # The next line enables shell command completion for gcloud.
 if [ -f '~/Documents/google-cloud-sdk/completion.bash.inc' ]; then . '~/Documents/google-cloud-sdk/completion.bash.inc'; fi
+
+export PATH="${HOME}/.local/bin:$PATH"
+
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+# Alias for running starkup installer
+alias starkup="curl --proto '=https' --tlsv1.2 -sSf https://sh.starkup.sh | sh -s --"
+
+# BEGIN SCARB COMPLETIONS
+_scarb() {
+  if ! scarb completions bash >/dev/null 2>&1; then
+    return 0
+  fi
+  source <(scarb completions bash)
+  _scarb "$@"
+}
+
+complete -o default -F _scarb scarb
+# END SCARB COMPLETIONS
+
+# BEGIN FOUNDRY COMPLETIONS
+_snforge() {
+  if ! snforge completions bash >/dev/null 2>&1; then
+    return 0
+  fi
+  source <(snforge completions bash)
+  _snforge "$@"
+}
+
+_sncast() {
+  if ! sncast completions bash >/dev/null 2>&1; then
+    return 0
+  fi
+  source <(sncast completions bash)
+  _sncast "$@"
+}
+
+complete -o default -F _snforge snforge
+complete -o default -F _sncast sncast
+# END FOUNDRY COMPLETIONS
+
+export PATH="$PATH:/Users/markus/.bifrost/bin"
+
+# Activate mise, which manages tool versions for the GitLab Development Kit (GDK).
+# Keep this last, so the versions it selects come before everything else in `$PATH`.
+if command -v mise &> /dev/null; then
+	eval "$(mise activate bash)";
+fi;
