@@ -17,10 +17,10 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 ###############################################################################
 
 # Set computer name (as done via System Preferences → Sharing)
-sudo scutil --set ComputerName "iMac-5K"
-sudo scutil --set HostName "iMac-5K"
-sudo scutil --set LocalHostName "iMac-5K"
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "iMac-5K"
+sudo scutil --set ComputerName "Markus-Air"
+sudo scutil --set HostName "Markus-Air"
+sudo scutil --set LocalHostName "Markus-Air"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "Markus-Air"
 
 # Disable the sound effects on boot
 #sudo nvram SystemAudioVolume=" "
