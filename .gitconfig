@@ -189,6 +189,9 @@
 
 	templateDir = ~/.config/git/template/
 	defaultBranch = main
+[maintenance]
+	repo = /Users/markus/Documents/gdk
+	repo = /Users/markus/Documents/gdk/gitlab
 [credential "https://github.com"]
 	helper = 
 	helper = !/opt/homebrew/bin/gh auth git-credential
