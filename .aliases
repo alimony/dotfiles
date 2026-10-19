@@ -151,3 +151,5 @@ alias pgstart18='/opt/homebrew/opt/postgresql@18/bin/postgres -D /opt/homebrew/v
 alias fixemoji='killall TextInputMenuAgent && killall \"CharacterPicker\" && open -a \"System Preferences\" && osascript -e '\''tell application \"System Preferences\" to quit'\'''
 
 alias desktop='cd ~/Desktop'
+
+alias claude2='CLAUDE_CONFIG_DIR="$HOME/.claude-2" claude'
