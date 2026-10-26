@@ -3,7 +3,7 @@
 # Run it again after you edit local.headroom.proxy.plist or HEADROOM_VERSION.
 set -euo pipefail
 
-HEADROOM_VERSION="0.40.0"
+HEADROOM_VERSION="0.41.0"
 LABEL="local.headroom.proxy"
 PORT=8787
 SOURCE="$(cd "$(dirname "$0")" && pwd)/$LABEL.plist"
