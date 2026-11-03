@@ -153,3 +153,5 @@ alias fixemoji='killall TextInputMenuAgent && killall \"CharacterPicker\" && ope
 alias desktop='cd ~/Desktop'
 
 alias claude2='CLAUDE_CONFIG_DIR="$HOME/.claude-2" claude'
+
+alias cdd='cd ~/Documents'
