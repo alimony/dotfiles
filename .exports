@@ -57,3 +57,6 @@ if [ -f "$HOME/Library/LaunchAgents/local.headroom.proxy.plist" ]; then
 	export ANTHROPIC_BASE_URL='http://127.0.0.1:8787';
 	export ENABLE_TOOL_SEARCH='true';
 fi;
+
+# Stop @stripe/link-cli's npm postinstall from running `npx skills add -g`, which installs agent skills into ~/.claude/skills.
+export LINK_CLI_SKIP_SKILL_INSTALL='1';
