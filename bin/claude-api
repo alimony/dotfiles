@@ -1,0 +1,113 @@
+#!/usr/bin/env bash
+# claude-api – run `claude -p` on API credits, falling back across several keys.
+#
+# Keys:   one key per file in $CLAUDE_API_KEY_DIR (default ~/.config/anthropic/keys),
+#         named *.key and tried in sort order, e.g. 10-primary.key, 20-backup.key.
+# Usage:  claude-api -p "your prompt" [any other claude flags]
+#         git diff | claude-api -p "review this diff"
+#
+# Every argument goes to claude unchanged, and -p (or --print) is required: API keys
+# are for non-interactive runs only, so claude-api refuses to start an interactive session.
+#
+# If a run fails because a key is out of credits, claude-api marks that key as exhausted
+# for $CLAUDE_API_COOLDOWN_SECONDS and tries the next key. If the failed run had already
+# started a session, the next key resumes that session with the same arguments, so every
+# flag (tools, permissions, output format, system prompt) still applies and work already
+# done is not repeated. The resumed turn gets a "continue" note on stdin.
+
+set -uo pipefail
+
+KEY_DIR="${CLAUDE_API_KEY_DIR:-$HOME/.config/anthropic/keys}"
+STATE_DIR="${CLAUDE_API_STATE_DIR:-$HOME/.cache/claude-api}"
+COOLDOWN="${CLAUDE_API_COOLDOWN_SECONDS:-21600}"   # 6 h before retrying an exhausted key
+# Matched only against stderr and the last lines of stdout, where claude reports a
+# failed run, so a run that merely reads or prints the word "credit" is not misread.
+PATTERN="${CLAUDE_API_EXHAUSTED_PATTERN:-credit balance is too low|insufficient credit|out of credits}"
+CLAUDE_BIN="${CLAUDE_API_CLAUDE_BIN:-claude}"
+PROJECTS_DIR="${CLAUDE_CONFIG_DIR:-$HOME/.claude}/projects"
+CONTINUE_NOTE="The previous run was interrupted by an API credit error. Continue where you left off; do not start over."
+
+die() { echo "claude-api: $*" >&2; exit 2; }
+
+print_mode=false
+for arg in "$@"; do
+  [[ $arg == -p || $arg == --print ]] && { print_mode=true; break; }
+done
+$print_mode || die "pass -p (or --print): API keys are for non-interactive runs only"
+
+mkdir -p "$STATE_DIR"
+shopt -s nullglob
+keys=("$KEY_DIR"/*.key)
+(( ${#keys[@]} )) || die "no *.key files in $KEY_DIR"
+
+# Buffer piped stdin so it can be replayed on a retry.
+stdin_file=""
+if [[ -p /dev/stdin || -f /dev/stdin ]]; then
+  stdin_file=$(mktemp)
+  cat > "$stdin_file"
+fi
+resume_stdin=$(mktemp)
+printf '%s\n' "$CONTINUE_NOTE" > "$resume_stdin"
+
+tmp_out=$(mktemp); tmp_err=$(mktemp)
+cleanup() { rm -f "$tmp_out" "$tmp_err" "$resume_stdin" ${stdin_file:+"$stdin_file"}; }
+trap cleanup EXIT
+
+new_uuid() {
+  if command -v uuidgen >/dev/null; then uuidgen | tr '[:upper:]' '[:lower:]'
+  else python3 -c 'import uuid; print(uuid.uuid4())'; fi
+}
+
+session_exists() {
+  [[ -n $(find "$PROJECTS_DIR" -name "$1.jsonl" -print -quit 2>/dev/null) ]]
+}
+
+out_of_credits() {
+  { tail -n 5 "$tmp_out"; cat "$tmp_err"; } | grep -qiE "$PATTERN"
+}
+
+session=$(new_uuid)
+resuming=false
+status=1
+
+for keyfile in "${keys[@]}"; do
+  name=$(basename "$keyfile" .key)
+  marker="$STATE_DIR/$name.exhausted"
+
+  if [[ -f $marker ]] && (( $(date +%s) - $(cat "$marker") < COOLDOWN )); then
+    continue
+  fi
+
+  if $resuming; then
+    echo "claude-api: resuming session $session with key '$name'" >&2
+    # Same arguments as the first run. The continue note goes on stdin, because a
+    # trailing argument would be swallowed by a variadic flag such as --disallowed-tools.
+    # A prompt given as an argument is sent again with the note appended.
+    args=(--resume "$session" "$@")
+    input=$resume_stdin
+  else
+    args=(--session-id "$session" "$@")
+    input=${stdin_file:-/dev/null}
+  fi
+
+  key=$(<"$keyfile")
+  ANTHROPIC_API_KEY="$key" "$CLAUDE_BIN" "${args[@]}" < "$input" \
+    2> >(tee "$tmp_err" >&2) | tee "$tmp_out"
+  status=${PIPESTATUS[0]}
+  wait   # let the stderr tee finish writing
+
+  if (( status == 0 )) || ! out_of_credits; then
+    exit "$status"    # success, or a failure that is not about credits
+  fi
+
+  echo "claude-api: key '$name' is out of credits – trying the next one" >&2
+  date +%s > "$marker"
+
+  if session_exists "$session"; then
+    resuming=true
+  else
+    session=$(new_uuid)   # nothing was saved; start fresh with the next key
+  fi
+done
+
+die "all keys are out of credits or cooling down (markers in $STATE_DIR)"
