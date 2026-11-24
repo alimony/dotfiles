@@ -62,8 +62,10 @@ session_exists() {
   [[ -n $(find "$PROJECTS_DIR" -name "$1.jsonl" -print -quit 2>/dev/null) ]]
 }
 
-out_of_credits() {
-  { tail -n 5 "$tmp_out"; cat "$tmp_err"; } | grep -qiE "$PATTERN"
+out_of_credits() {  # scans the whole run output, not just its last lines
+  # grep reads the files directly. A pipe from cat races with grep -q under pipefail,
+  # and a large run output then reads as "not out of credits".
+  grep -qiE "$PATTERN" "$tmp_out" "$tmp_err"
 }
 
 session=$(new_uuid)
@@ -91,10 +93,11 @@ for keyfile in "${keys[@]}"; do
   fi
 
   key=$(<"$keyfile")
-  ANTHROPIC_API_KEY="$key" "$CLAUDE_BIN" "${args[@]}" < "$input" \
-    2> >(tee "$tmp_err" >&2) | tee "$tmp_out"
+  # Stderr goes to a file, then is replayed. A process-substitution tee is not reliably
+  # finished when `wait` returns on macOS bash 3.2, so the credit check could miss it.
+  ANTHROPIC_API_KEY="$key" "$CLAUDE_BIN" "${args[@]}" < "$input" 2> "$tmp_err" | tee "$tmp_out"
   status=${PIPESTATUS[0]}
-  wait   # let the stderr tee finish writing
+  cat "$tmp_err" >&2
 
   if (( status == 0 )) || ! out_of_credits; then
     exit "$status"    # success, or a failure that is not about credits
